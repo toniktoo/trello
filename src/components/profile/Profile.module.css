@@ -1,0 +1,74 @@
+.profile {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 3px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.blockFoto {
+    max-width: 200px;
+    width: 100%;
+
+}
+
+.userFoto {
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    width: 700;
+    margin: 0 0 16px 0;
+}
+
+.btnUnderFoto {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.blockInfo {
+    margin-left: 48px;
+    width: 100%;
+}
+
+.info {
+    border: 1px solid #1890ff;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 48px 48px 16px 48px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.titleMain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    background-color: #1890ff;
+    box-sizing: border-box;
+    border-bottom-right-radius: 5px;
+    padding: 4px 8px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.infoItem {
+    margin: 0 0 0 24px;
+}
