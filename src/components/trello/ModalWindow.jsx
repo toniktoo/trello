@@ -25,7 +25,9 @@ const Window = styled.div`
   max-width: 70%;
   width: 100%;
   height: 70%;
-  background-image: linear-gradient(315deg, #275aa7 0%, #12100e 74%);
+  background-color: #1b2845;
+  background-image: linear-gradient(315deg, #1b2845 0%, #274060 74%);
+
   border-radius: 3px;
   padding: 16px;
   display: flex;
@@ -84,8 +86,9 @@ const Title = styled.h2`
 `;
 const Subtitle = styled.h3`
   width: 600;
-  color: #fff;
+  color: #abb9c7;
   margin: 0 0 8px 0;
+  text-decoration: underline;
 `;
 
 const Main = styled.div`
@@ -123,6 +126,8 @@ const Sidebar = styled.div`
 
 const Btn = styled(Button)`
   width: 100%;
+  border: none;
+  font-weight: 700;
   min-width: 40px;
   &:not(:last-child) {
     margin-bottom: 8px;
@@ -161,7 +166,6 @@ const Description = styled.p`
 
 export const ModalWindow = ({ card, handleCloseWindow, isShow, quiries }) => {
   const [isModalShow, setIsModalShow] = useState(false);
-  const [isBtnsShow, setIsBtnsShow] = useState(false);
   const [isChangeData, setIsChangeData] = useState(false);
   const [titleValue, setTitleValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
@@ -243,18 +247,19 @@ export const ModalWindow = ({ card, handleCloseWindow, isShow, quiries }) => {
   return isShow ? (
     <Wrapper>
       <Window>
-        <Main>
-          <Header>
-            <Subtitle>Название:</Subtitle>
-            {renderHeader()}
-          </Header>
-          <Content>
-            <Subtitle>Описание:</Subtitle>
-            {renderDescription()}
-          </Content>
-        </Main>
-        <Sidebar>{renderBtnSidebar()}</Sidebar>
+          <Main>
+            <Header>
+              <Subtitle>Название:</Subtitle>
+              {renderHeader()}
+            </Header>
+            <Content>
+              <Subtitle>Описание:</Subtitle>
+              {renderDescription()}
+            </Content>
+          </Main>
+          <Sidebar>{renderBtnSidebar()}</Sidebar>
       </Window>
+
       <ModalAction
         handleOk={handleDelteCard}
         handleCancel={toggleOpenModal}

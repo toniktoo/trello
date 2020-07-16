@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { uniqueId } from 'lodash';
-import { useFirestore } from 'react-redux-firebase';
 
 import { Input } from 'antd';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
@@ -79,8 +77,7 @@ const ListAddTitle = styled.span`
   color: #5e6c84;
 `;
 
-export const ComponentAddCard = ({ listTitle, hovered }) => {
-  const firestore = useFirestore();
+export const ComponentAddCard = ({ listTitle, hovered, quiries }) => {
   const { uid } = useSelector((state) => state.firebase.auth);
 
   const [isAddCard, setIsAddCard] = useState(false);
@@ -91,11 +88,8 @@ export const ComponentAddCard = ({ listTitle, hovered }) => {
 
   const handleSubmitAddCard = (event) => {
     event.preventDefault();
-    firestore.collection('users').doc(uid).collection('trello').add({
-      cardId: uniqueId(),
-      cardTitle: cardTitle,
-      list: listTitle,
-    });
+    quiries.addList(uid, cardTitle, listTitle);
+
     setCardTitle('');
     setIsAddCard(false);
   };

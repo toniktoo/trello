@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { isEmpty, useFirebase } from 'react-redux-firebase';
 
-import { routes } from '../constants/routes';
+import { routes } from '../../constants/routes';
 import { UserAddOutlined, ExportOutlined } from '@ant-design/icons';
 
 const Wrapper = styled.div`
@@ -13,14 +13,17 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 40px;
+  padding: 0 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
 `;
 
 const TitleApp = styled.span`
   margin: 0;
 `;
-const LinkHome = styled(Link)`
+const Username = styled.h3`
   margin: 0;
-  color: #6d6d6d;
+  color: #a0b5ca;
 `;
 
 const ProfileWrap = styled.div`
@@ -30,7 +33,7 @@ const ProfileWrap = styled.div`
 
 const ProfileExit = styled.div`
   font-size: 20px;
-  color: #6d6d6d;
+  color: #a0b5ca;
   display: flex;
   align-items: center;
   margin-left: 8px;
@@ -42,17 +45,13 @@ const ProfileExit = styled.div`
 `;
 
 const Divider = styled.div`
-  color: #65a7f3;
+  color: #a0b5ca;
   font-weight: 900;
   margin: 0 0 16px 0;
   font-size: 16px;
 `;
 
-const DividerCenter = styled(Divider)`
-  @media (max-width: 600px) {
-    display: none;
-  }
-`;
+const DividerCenter = styled(Divider)``;
 
 export const HeaderApp = ({ title }) => {
   const firebase = useFirebase();
@@ -63,7 +62,7 @@ export const HeaderApp = ({ title }) => {
     if (!isEmpty(auth)) {
       return (
         <ProfileWrap>
-          <Link to={routes.profile}>{displayName}</Link>
+          <Username>{displayName}</Username>
           <ProfileExit>
             <ExportOutlined onClick={() => firebase.logout()} />
           </ProfileExit>
@@ -83,9 +82,6 @@ export const HeaderApp = ({ title }) => {
 
   return (
     <Wrapper>
-      <Divider orientation="left">
-        <LinkHome to={routes.home}>Настройки</LinkHome>
-      </Divider>
       <DividerCenter orientation="center">
         <TitleApp>{title}</TitleApp>
       </DividerCenter>

@@ -4,7 +4,7 @@ import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 
 import { routes } from '../../constants/routes';
-import { AuthIsLoaded } from '../Loaders';
+import { AuthIsLoaded } from '../trello/Loaders';
 
 export const PrivateRoute = ({ children, ...rest }) => {
   const auth = useSelector((state) => state.firebase.auth);

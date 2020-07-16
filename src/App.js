@@ -4,16 +4,15 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { FormSignIn } from './components/auth/FormSignIn';
 import { routes } from './constants/routes';
-import { ProfileUser } from './components/profile';
 import { Trello } from './components/trello/Trello';
 import { PrivateRoute } from './components/routes/PrivateRoute';
 
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #2b4162;
-  background-image: linear-gradient(315deg, #2b4162 0%, #12100e 74%);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+  background-color: #1b2845;
+  background-image: linear-gradient(315deg, #1b2845 0%, #274060 74%);
 `;
 
 const App = () => {
@@ -21,8 +20,7 @@ const App = () => {
     <Wrapper>
       <Switch>
         <Route path={routes.signIn} component={FormSignIn} />
-        <PrivateRoute path={routes.home} children={<Trello />} />
-        <PrivateRoute path={routes.profileUser} children={<ProfileUser />} />
+        <PrivateRoute exact path={routes.home} children={<Trello />} />
         <Redirect to={routes.home} />
       </Switch>
     </Wrapper>

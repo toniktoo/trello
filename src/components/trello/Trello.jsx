@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { groupBy, omitBy } from 'lodash';
 
-import { AuthIsLoaded, DataIsLoaded } from '../Loaders';
+import { AuthIsLoaded, DataIsLoaded } from './Loaders';
 import { TrelloList } from './TrelloList';
 import { ComponentAddList } from './ComponentAddList';
-import { HeaderApp } from '../HeaderApp';
+import { HeaderApp } from './HeaderApp';
 import Fade from 'react-reveal/Fade';
 
 const Wraper = styled.div`
@@ -16,13 +16,14 @@ const Wraper = styled.div`
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  padding: 8px 16px 16px 16px;
   overflow-x: auto;
 `;
 
 const Board = styled.div`
   display: flex;
   overflow-x: auto;
+  margin: 0 16px;
+  height: calc(100vh - 56px);
 `;
 
 export const Trello = () => {

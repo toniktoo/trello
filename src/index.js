@@ -5,7 +5,6 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import './styles.css';
 import App from './App';
 import { store } from './redux/store';
 import { rrfProps } from './firebase';

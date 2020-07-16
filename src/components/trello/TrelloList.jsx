@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   vertical-align: top;
   white-space: nowrap;
   margin-right: 8px;
-
 `;
 const List = styled.div`
   background-color: #ebecf0;
@@ -29,7 +28,6 @@ const List = styled.div`
   white-space: normal;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
-
 `;
 const Header = styled.div`
   padding: 8px;
@@ -50,7 +48,6 @@ const HeaderTitle = styled.h2`
   max-width: 235px;
 `;
 const BtnDelete = styled.div`
-  /* display: ${({ hovered }) => (hovered ? 'flex' : 'none')}; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,8 +79,12 @@ const Card = styled.p`
   margin-bottom: 8px;
   padding: 6px 8px 6px;
   font-weight: 600;
-  color: #5e6c84;
+  color: #1a1b1d;
   align-items: center;
+  &:hover {
+    background-color: rgba(7, 23, 51, 0.08);
+    color: #172b4d;
+  }
 `;
 
 const ModalSnippet = styled.span`
@@ -119,26 +120,8 @@ export const TrelloList = ({ title, cards }) => {
     });
 
     for (let id of idCards) {
-      // quiries.deleteCard(uid, id);
-      firestore
-        .collection('users')
-        .doc(uid)
-        .collection('trello')
-        .doc(id)
-        .delete();
-      // quiries.updateLists(uid);
-      const lists = firestore
-        .collection('users')
-        .doc(uid)
-        .collection('trello')
-        .doc('lists');
-      // .update({
-      //   [title]: null,
-      // });
-
-      lists.update({
-        [title]: null,
-      });
+      quiries.deleteCard(uid, id);
+      quiries.updateLists(uid);
     }
   };
 
@@ -170,7 +153,7 @@ export const TrelloList = ({ title, cards }) => {
           </BtnDelete>
         </Header>
         <Cards>{renderCards()}</Cards>
-        <ComponentAddCard listTitle={title} />
+        <ComponentAddCard listTitle={title} quiries={quiries} />
       </List>
       <ModalAction
         handleOk={handleDeleteCol}

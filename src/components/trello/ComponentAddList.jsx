@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 
+import { Quiries } from '../../api/index';
 import { Input } from 'antd';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 
 const Wrapper = styled.div`
-  min-height: 32px;
-  height: 100%;
+  height: 125px;
 `;
 const List = styled.div`
   width: 272px;
-  min-height: 32px;
   height: 100%;
   background-color: #ebecf0;
   border-radius: 3px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  max-height: 100%;
-  position: relative;
   white-space: normal;
   align-items: center;
   justify-content: center;
@@ -29,6 +25,7 @@ const List = styled.div`
 const FormAdd = styled.div`
   width: 100%;
   padding: 8px;
+  background-color: #eaebef;
 `;
 const FormBtsWrapper = styled.div`
   display: flex;
@@ -64,6 +61,7 @@ const ListAddWrapper = styled.div`
   color: #5e6c84;
   padding: 0 10px;
   cursor: pointer;
+  justify-content: center;
 
   &:hover {
     background-color: rgba(9, 30, 66, 0.08);
@@ -84,12 +82,12 @@ const ListAddTitle = styled.span`
 
 export const ComponentAddList = () => {
   const firestore = useFirestore();
+  const quiries = new Quiries(firestore);
   const { uid } = useSelector((state) => state.firebase.auth);
 
   const [isAddCol, setIsAddCol] = useState(false);
   const [cardTitle, setCardTitle] = useState('');
   const [colTitle, setColTitle] = useState('');
-  const [hoveredList, setHoveredList] = useState(false);
 
   const handleAddCol = () => setIsAddCol(!isAddCol);
   const onChangeCol = (e) => setColTitle(e.target.value);
@@ -97,33 +95,17 @@ export const ComponentAddList = () => {
 
   const handleSubmitAddCol = (event) => {
     event.preventDefault();
-    firestore
-      .collection('users')
-      .doc(uid)
-      .collection('trello')
-      .doc('lists')
-      .set(
-        {
-          [uniqueId()]: colTitle,
-        },
-        { merge: true }
-      );
-    firestore.collection('users').doc(uid).collection('trello').add({
-      cardTitle: cardTitle,
-      cardDescription: '',
-      cardId: uniqueId(),
-      list: colTitle,
-    });
+
+    quiries.addColInLists(uid, colTitle);
+    quiries.addCard(uid, cardTitle, colTitle);
+
     setCardTitle('');
     setColTitle('');
     setIsAddCol(false);
   };
 
   return (
-    <Wrapper
-    // onMouseEnter={() => setHoveredList(true)}
-    // onMouseLeave={() => setHoveredList(false)}
-    >
+    <Wrapper>
       <List>
         {isAddCol ? (
           <FormAdd onSubmit={handleSubmitAddCol}>
@@ -148,7 +130,7 @@ export const ComponentAddList = () => {
                 value="Добавить список"
                 style={{ width: '150px', cursor: 'pointer' }}
               />
-              <FormBtnDelete onClick={handleAddCol} hovered={hoveredList}>
+              <FormBtnDelete onClick={handleAddCol}>
                 <CloseOutlined />
               </FormBtnDelete>
             </FormBtsWrapper>
